@@ -1,0 +1,30 @@
+version: '3'
+volumes:
+  bundle:
+services:
+  db:
+    image: mysql:5.7
+    command: ['mysqld', '--character-set-server=utf8', '--collation-server=utf8_general_ci', '--max_allowed_packet=1073741824']
+    restart: always
+    volumes:
+      - ./db/data/mysql:/var/lib/mysql
+    ports:
+      - 7306:3306
+    env_file:
+      - .env
+  app:
+    depends_on:
+      - db
+    build: 
+      context: .
+      dockerfile: Dockerfile-dev
+    command: sh -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 7000 -b '0.0.0.0'"
+    restart: always 
+    env_file:
+      - .env
+    volumes:
+      - bundle:/usr/local/bundle
+      - ./:/app
+    ports: 
+      - 7000:7000
+  
