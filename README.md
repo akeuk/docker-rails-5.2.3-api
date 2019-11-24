@@ -1,24 +1,32 @@
-# README
+## Development
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Rails server (with MySQL service)
 
-Things you may want to cover:
+```sh
+docker-compose up app
+```
 
-* Ruby version
+When Dockerfile-dev has changed.
 
-* System dependencies
+```sh
+docker-compose up --build app
+```
 
-* Configuration
+### Bash
 
-* Database creation
+```sh
+docker-compose exec app bash
+```
 
-* Database initialization
+Without app container.
 
-* How to run the test suite
+```sh
+docker-compose run --rm app bash
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+### Stop all services
 
-* Deployment instructions
+```sh
+docker-compose down
+```
 
-* ...
