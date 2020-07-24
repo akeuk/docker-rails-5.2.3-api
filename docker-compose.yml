@@ -9,7 +9,7 @@ services:
     volumes:
       - ./db/data/mysql:/var/lib/mysql
     ports:
-      - 7306:3306
+      - 7001:3306
     env_file:
       - .env
   app:
